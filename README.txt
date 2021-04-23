@@ -3,7 +3,7 @@
 ##############################
 
 * We built a model to evaluate the effects of human synonymous variants, and we used this model to
-precompute all possible human synonymous variants. All these predictions are stored in a SQL database called'synvep_database.db'. 
+precompute all possible human synonymous variants. All these predictions are stored in a SQL database called 'synvep_database.db'. 
 
 * Reference genome assembly for query is GRCh37 (hg19), GRCh38 (hg38) genomic positions are also returned as part of the result.
 
