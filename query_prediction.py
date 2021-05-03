@@ -136,7 +136,7 @@ def get_predictions(mode, input):
     :return: a data table with predictions in txt format with name designated in param output
     '''
     ###connect to sqlite database
-    conn = sqlite3.connect('synvep_database.db')
+    conn = sqlite3.connect('synvep_database_v1.db')
     cur = conn.cursor()
     ###
     if mode not in ['bed', 'vcf','dbsnp','gene']:
@@ -183,7 +183,10 @@ with open(Output, 'w') as f:
                 l = list(l)
                 synvep = l[8]
                 l.pop(8)
-                f.write(','.join(str(s) for s in l) + ',' + str(round(float(synvep), 4)) + '\n')
+                if synvep is None:
+                    f.write(','.join(str(s) for s in l) + ',' + '' + '\n')
+                else:
+                    f.write(','.join(str(s) for s in l) + ',' + str(round(float(synvep), 4)) + '\n')
     else:
         f.write('transcript_ID\ttranscript_position\tcodon_mutation\tchr\tgenomic_position\tref\talt\tstrand\tclass\tHGNC_gene_symbol\tdbSNP_ID\tGRCh38_genomic_position\tsynVep\n')
         for L in result:
@@ -191,7 +194,10 @@ with open(Output, 'w') as f:
                 l = list(l)
                 synvep = l[8]
                 l.pop(8)
-                f.write('\t'.join(str(s) for s in l) + '\t' + str(round(float(synvep), 4)) + '\n')
+                if synvep is None:
+                    f.write('\t'.join(str(s) for s in l) + '\t' + '' + '\n')
+                else:
+                    f.write('\t'.join(str(s) for s in l) + '\t' + str(round(float(synvep), 4)) + '\n')
 
 
 sys.stdout = sys.__stdout__
